@@ -46,7 +46,6 @@
 % Last modified:   2020/03/16   Meysam Mahooti
 %--------------------------------------------------------------------------
 */
-
 /*
 int main(){
 
@@ -57,6 +56,8 @@ int main(){
 
     int nobs=46;
     Matrix obs(nobs,4);
+
+    Global::GEOS3();
 
     for(int i=1;i<=nobs;i++){
 
@@ -78,8 +79,50 @@ int main(){
     }
 
 
+    double sigma_range = 92.5;          //% [m]
+    double sigma_az = 0.0224*Constants::Rad; //% [rad]
+    double sigma_el = 0.0139*Constants::Rad; //% [rad]
+
+    //% Kaena Point station
+    double lat = Constants::Rad*21.5748;     //% [rad]
+    double lon = Constants::Rad*(-158.2706); //% [rad]
+    double alt = 300.20;                //% [m]
+
+    Matrix Rs = Position(lon, lat, alt);
+
+    double Mjd1 = obs(1,1);
+    double Mjd2 = obs(9,1);
+    double Mjd3 = obs(18,1);
+
+//   %[r2,v2] = anglesg(obs(1,2),obs(9,2),obs(18,2),obs(1,3),obs(9,3),obs(18,3),...
+//              %                 Mjd1,Mjd2,Mjd3,Rs,Rs,Rs);
+//   % [r2,v2] = anglesdr(obs(1,2),obs(9,2),obs(18,2),obs(1,3),obs(9,3),obs(18,3),...
+//               %                    Mjd1,Mjd2,Mjd3,Rs,Rs,Rs);
+
+
+    //Y0_apr = [r2;v2];
+
+    double Mjd0 = Mjday(1995,1,29,02,38,0);
+
+    double Mjd_UTC = obs(9,1);
+
+    Global::AuxParam::Mjd_UTC = Mjd_UTC;
+    Global::AuxParam::n      = 20;
+    Global::AuxParam::m      = 20;
+    Global::AuxParam::sun     = 1;
+    Global::AuxParam::moon    = 1;
+    Global::AuxParam::planets = 1;
+
+    int n_eqn  = 6;
+
+
+    double Y = DEInteg(&Accel, 0, -(obs(9,1)-Mjd0)*86400.0, 1e-13, 1e-6, 6, Y0_apr);
+
+
+
 
 
 
     return 0;
-}*/
+}
+ */

@@ -24,6 +24,17 @@
 #include "./include/NutAngles.h"
 #include "./include/Position.h"
 #include "./include/IERS.h"
+#include "./include/PoleMatrix.h"
+#include "./include/NutMatrix.h"
+#include "./include/PrecMatrix.h"
+#include "./include/gmst.h"
+#include "./include/EqnEquinox.h"
+#include "./include/gast.h"
+#include "./include/GHAMatrix.h"
+
+
+
+
 
 
 
@@ -55,11 +66,11 @@ int proMat_01()
 
 
     sol = m1 * m2;
-/*
-    m1.print();
-    m2.print();
-    sol.print();
-*/
+
+    //m1.print();
+    //m2.print();
+    //sol.print();
+
     _assert(sol(1,1) == m1(1,1) && sol(1,2) == m1(1,2) && sol(2,1) == m1(2,1) && sol(2,2) == m1(2,2));
     
     return 0;
@@ -392,6 +403,101 @@ int IERS() {
     return 0;
 }
 
+int PoleMatrix() {
+    Matrix sol(3,3);
+    sol=PoleMatrix(0.2551451,4515);
+
+    _assert(fabs(sol(1,1) - 0.967626684693315) < TOL_);
+    _assert(fabs(sol(1,2) -  -0.127884781524882) < TOL_);
+    _assert(fabs(sol(1,3) -  -0.217586952099058) < TOL_);
+    _assert(fabs(sol(2,1) -  0) < TOL_);
+    _assert(fabs(sol(2,2) -  -0.862120373238167) < TOL_);
+    _assert(fabs(sol(2,3) -  0.506703524802901) < TOL_);
+    _assert(fabs(sol(3,1) -  -0.252385813922701) < TOL_);
+    _assert(fabs(sol(3,2) -  -0.490299851827448) < TOL_);
+    _assert(fabs(sol(3,3) -  -0.834210678563011) < TOL_);
+
+    return 0;
+}
+
+int PrecMatrix() {
+    Matrix sol(3,3);
+    sol=PrecMatrix(0.2551451,4515);
+
+    _assert(fabs(sol(1,1) - 0.999995464055671) < TOL_);
+    _assert(fabs(sol(1,2) -  -0.00276180170860104) < TOL_);
+    _assert(fabs(sol(1,3) -  -0.00120179840492362) < TOL_);
+    _assert(fabs(sol(2,1) -  0.00276180170855866) < TOL_);
+    _assert(fabs(sol(2,2) -  0.999996186217012) < TOL_);
+    _assert(fabs(sol(2,3) -  -1.65960347120066e-06) < TOL_);
+    _assert(fabs(sol(3,1) -  0.00120179840502101) < TOL_);
+    _assert(fabs(sol(3,2) -  -1.65953294472943e-06) < TOL_);
+    _assert(fabs(sol(3,3) -  0.999999277838659) < TOL_);
+
+    return 0;
+}
+
+int NutMatrix() {
+    Matrix sol(3,3);
+    sol=NutMatrix(4515.25);
+
+    _assert(fabs(sol(1,1) - 0.999999996447048) < TOL_);
+    _assert(fabs(sol(1,2) -  7.73307456770637e-05) < TOL_);
+    _assert(fabs(sol(1,3) -  3.35538296369724e-05) < TOL_);
+    _assert(fabs(sol(2,1) -  -7.73307990794727e-05) < TOL_);
+    _assert(fabs(sol(2,2) -  0.999999997008709) < TOL_);
+    _assert(fabs(sol(2,3) -  1.5902499256315e-06) < TOL_);
+    _assert(fabs(sol(3,1) -  -3.35537065613906e-05) < TOL_);
+    _assert(fabs(sol(3,2) -  -1.5928446644442e-06) < TOL_);
+    _assert(fabs(sol(3,3) -  0.999999999435806) < TOL_);
+
+    return 0;
+}
+
+int gmst() {
+
+    _assert(fabs(gmst(6523.25) - 1.66477739228949) < TOL_);
+    _assert(fabs(gmst(0.652325) -  5.08310881449846) < TOL_);
+    _assert(fabs(gmst(123.456) -  5.96212844883578) < TOL_);
+
+    return 0;
+}
+
+int EqnEquinox() {
+
+    _assert(fabs(EqnEquinox(6523.25) - 1.32310916096489e-05) < TOL_);
+    _assert(fabs(EqnEquinox(0.652325) -  2.52749545765384e-05) < TOL_);
+    _assert(fabs(EqnEquinox(123.456) -  4.00438480107561e-05) < TOL_);
+
+    return 0;
+}
+
+int gast() {
+
+    _assert(fabs(gast(6523.25) - 1.6647906233811) < TOL_);
+    _assert(fabs(gast(0.652325) -  5.08313408945303) < TOL_);
+    _assert(fabs(gast(123.456) -  5.96216849268379) < TOL_);
+
+    return 0;
+}
+
+int GHAMatrix() {
+    Matrix sol(3,3);
+    sol=GHAMatrix(4515.25);
+
+    _assert(fabs(sol(1,1) - 0.108006815576271) < TOL_);
+    _assert(fabs(sol(1,2) -  -0.99415015354275) < TOL_);
+    _assert(fabs(sol(1,3) -  0) < TOL_);
+    _assert(fabs(sol(2,1) -  0.99415015354275) < TOL_);
+    _assert(fabs(sol(2,2) -  0.108006815576271) < TOL_);
+    _assert(fabs(sol(2,3) -  0) < TOL_);
+    _assert(fabs(sol(3,1) -  0) < TOL_);
+    _assert(fabs(sol(3,2) -  0) < TOL_);
+    _assert(fabs(sol(3,3) -  1) < TOL_);
+
+    return 0;
+}
+
 
 
 
@@ -418,6 +524,16 @@ int all_tests()
     _verify(NutAngles);
     _verify(Position);
     _verify(IERS);
+    _verify(PoleMatrix);
+    _verify(PrecMatrix);
+    _verify(NutMatrix);
+    _verify(gmst);
+    _verify(EqnEquinox);
+    _verify(gast);
+    _verify(GHAMatrix);
+
+
+
 
 
     return 0;

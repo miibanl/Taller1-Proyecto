@@ -22,13 +22,16 @@ public:
         static double Mjd_UTC;
         static int n;
         static int m;
+        static int sun;
+        static int moon;
+        static int planets;
     };
 
     static Matrix *PC;
     static void DE430Coeff();
 
     static Matrix *geos3;
-    static void GEOS3();
+    static void GEOS3(int fila);
 
 
 

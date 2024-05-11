@@ -88,8 +88,18 @@ void Global::DE430Coeff(){
 
 Matrix *Global::geos3;
 
-void Global::GEOS3(){
-    Global::geos3 = new Matrix(46, 54);
+void Global::GEOS3(int fila) {
+    Global::geos3 = new Matrix(1, 1);
 
+    FILE *fid = fopen("../data/eop19620101.txt", "r");
+    if (fid == nullptr) {
+        printf("Error al abrir el fichero.");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 1; i <= 46; i++) {
+        fscanf(fid, "%s",
+               &((*geos3)(i,1)));
+    }
 }
 

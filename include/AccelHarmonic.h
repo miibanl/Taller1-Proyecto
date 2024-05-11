@@ -7,6 +7,8 @@
 
 #include "Matrix.h"
 #include "../include/Legendre.h"
+#include "../include/Global.h"
+
 
 
 Matrix AccelHarmonic(Matrix& r, Matrix& E, int n_max, int m_max);
