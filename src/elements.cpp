@@ -49,7 +49,10 @@ Matrix elements(const Matrix& y){
     double H = h.norm();
 
     double Omega = atan2(h(1,1), -h(1,2) );       //% Long. ascend. node
-    Omega = fmod(Omega,Constants::pi2);
+    fmod(Omega,Constants::pi2);
+    if(Omega<0){
+        Omega+=Constants::pi2;
+    }
     double i = atan2(sqrt((h(1,1)*h(1,1))+(h(1,2)*h(1,2))), h(1,3) ); //% Inclination
     double u = atan2 ( r(1,3)*H, -r(1,1)*h(1,2)+r(1,2)*h(1,1) );    //% Arg. of latitude
     double R  = r.norm();     //% Distance
@@ -68,7 +71,9 @@ Matrix elements(const Matrix& y){
     double nu = atan2(sqrt(1.0-e2)*eSinE, eCosE-e2);          //% True anomaly
 
     double omega = fmod(u-nu,Constants::pi2);                             //% Arg. of perihelion
-
+    if(omega<0){
+        omega+=Constants::pi2;
+    }
 
     result(1,1)=p;
     result(1,2)=a;

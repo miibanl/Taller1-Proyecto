@@ -34,6 +34,10 @@
 #include "./include/AccelHarmonic.h"
 #include "./include/LTC.h"
 #include "./include/elements.h"
+#include "./include/angl.h"
+#include "./include/TimeUpdate.h"
+#include "./include/MeasUpdate.h"
+
 
 
 
@@ -563,7 +567,6 @@ int elements() {
     Matrix sol(1,7);
     sol=elements(y);
 
-    cout<<sol(1,6)<<endl;
     _assert(fabs(sol(1,1) - 6.02396456836168) < TOL_);
     _assert(fabs(sol(1,2) -  4303.44106929666) < TOL_);
     _assert(fabs(sol(1,3) -  0.999299853996234) < TOL_);
@@ -572,6 +575,96 @@ int elements() {
     _assert(fabs(sol(1,6) -  3.28733653782776) < TOL_);
     _assert(fabs(sol(1,7) -  3.08812323724874) < TOL_);
 
+
+    return 0;
+}
+
+int TimeUpdate() {
+    Matrix P(2,2);
+    P(1,1)=1;
+    P(1,2)=2;
+    P(2,1)=3;
+    P(2,2)=4;
+
+    Matrix Phi(2,2);
+    Phi(1,1)=2;
+    Phi(1,2)=1;
+    Phi(2,1)=1;
+    Phi(2,2)=2;
+
+    Matrix sol(2,2);
+    sol = TimeUpdate(P,Phi,0.1);
+
+    _assert(fabs(sol(1,1) - 18.1) < TOL_);
+    _assert(fabs(sol(1,2) - 21.1) < TOL_);
+    _assert(fabs(sol(2,1) - 24.1) < TOL_);
+    _assert(fabs(sol(2,2) - 27.1) < TOL_);
+
+    return 0;
+}
+
+int angl() {
+    Matrix vec1(1,3);
+    vec1(1,1)=1;
+    vec1(1,2)=0;
+    vec1(1,3)=0;
+
+    Matrix vec2(1,3);
+    vec2(1,1)=0;
+    vec2(1,2)=1;
+    vec2(1,3)=0;
+
+    _assert(fabs(angl(vec1,vec2) - 1.5707963267949) < TOL_);
+
+    return 0;
+}
+
+int MeasUpdate() {
+    Matrix x(1,6);
+    x(1,1)=5735921.65020689;
+    x(1,2)=3118016.44631055;
+    x(1,3)=3736144.93179928;
+    x(1,4)=5198.76918451416;
+    x(1,5)=-2476.40536735507;
+    x(1,6)=-7192.16971213756;
+
+    Matrix z(1,1);
+    z(1,1)=1.0559084894933;
+
+    Matrix g(1,1);
+    g(1,1)=1.05892995381513;
+
+    Matrix s(1,1);
+    s(1,1)=0.00039095375244673;
+
+    Matrix G(3,2);
+    G(1,1)=9.59123748602943e-08;
+    G(1,2)=2.16050345227544e-07;
+    G(2,1)=-3.27382770920699e-07;
+    G(2,2)=0.0;
+    G(3,1)=0.0;
+    G(3,2)=0.0;
+
+    Matrix P(6,2);
+    P(1,1)=-941.143711797184 ;
+    P(1,2)=10455.2839772174;
+    P(2,1)=25850.3882249601;
+    P(2,2)=16767.2171636716;
+    P(3,1)=16682.1727780171;
+    P(3,2)=14283.1545059351;
+    P(4,1)=-0.0594779293881896;
+    P(4,2)=3.70889400821746;
+    P(5,1)=996.435188908888;
+    P(5,2)=5.68203493498356;
+    P(6,1)=5.68203493498356;
+    P(6,2)=992.623676969809;
+
+    Matrix K(1,6);
+    MeasUpdate(x,z,g,s,G,P,6,K);
+
+    K.print();
+
+    //_assert(fabs(angl(vec1,vec2) - 1.5707963267949) < TOL_);
 
     return 0;
 }
@@ -611,6 +704,9 @@ int all_tests()
     _verify(AccelHarmonic);
     _verify(LTC);
     _verify(elements);
+    _verify(angl);
+    _verify(TimeUpdate);
+    _verify(MeasUpdate);
 
 
 

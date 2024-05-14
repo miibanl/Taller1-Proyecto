@@ -126,6 +126,10 @@ int Matrix::getRows() const {
     return this->fil;
 }
 
+int Matrix::getCols() const {
+    return this->col;
+}
+
 Matrix Matrix::operator/(double scalar) {
     Matrix result(fil, col);
 
@@ -187,5 +191,89 @@ double Matrix::dot(const Matrix& a, const Matrix& b) {
     return result;
 }
 
+Matrix Matrix::transpose() const {
+    Matrix result(fil, col);
 
+    for (int i = 0; i < col; ++i) {
+        for (int j = 0; j < fil; ++j) {
+            result.matrix[i][j] = matrix[j][i];
+        }
+    }
+
+    return result;
+}
+
+Matrix Matrix::operator+(double scalar) {
+    Matrix result(fil, col);
+
+    for (int i = 0; i < fil; ++i) {
+        for (int j = 0; j < col; ++j) {
+            result.matrix[i][j] = matrix[i][j] + scalar;
+        }
+    }
+
+    return result;
+}
+
+
+
+Matrix Matrix::inverse() const {
+    // Verificar si la matriz es cuadrada
+    if (fil != col) {
+        std::cerr << "La matriz no es cuadrada, no se puede calcular la inversa." << std::endl;
+        return Matrix(fil, col); // Devolver una matriz vacía o una copia de la matriz original
+    }
+
+    int n = fil; // Dimensión de la matriz cuadrada
+    Matrix result(n, n); // Matriz para almacenar la inversa
+
+    // Copiar la matriz actual a una matriz temporal para no modificarla
+    Matrix temp(*this);
+
+    // Crear una matriz identidad para almacenar los elementos de la matriz inversa
+    Matrix identity(n, n);
+    for (int i = 1; i <= n; ++i) {
+        identity(i, i) = 1.0;
+    }
+
+    // Algoritmo de eliminación gaussiana para calcular la inversa
+    for (int i = 1; i <= n; ++i) {
+        // Dividir la fila i entre el elemento de la diagonal para hacerlo 1
+        double divisor = temp(i, i);
+        for (int j = 1; j <= n; ++j) {
+            temp(i, j) /= divisor;
+            identity(i, j) /= divisor;
+        }
+
+        // Restar múltiplos de la fila i de otras filas para hacer ceros debajo de la diagonal
+        for (int k = 1; k <= n; ++k) {
+            if (k != i) {
+                double factor = temp(k, i);
+                for (int j = 1; j <= n; ++j) {
+                    temp(k, j) -= factor * temp(i, j);
+                    identity(k, j) -= factor * identity(i, j);
+                }
+            }
+        }
+    }
+
+    // La matriz identity ahora contiene la inversa
+    return identity;
+}
+
+Matrix Matrix::createIdentityMatrix(int size) {
+    Matrix identity(size, size);
+
+    for (int i = 1; i <= size; ++i) {
+        for (int j = 1; j <= size; ++j) {
+            if (i == j) {
+                identity(i, j) = 1.0;
+            } else {
+                identity(i, j) = 0.0;
+            }
+        }
+    }
+
+    return identity;
+}
 
