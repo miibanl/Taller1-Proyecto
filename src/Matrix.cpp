@@ -215,51 +215,54 @@ Matrix Matrix::operator+(double scalar) {
     return result;
 }
 
-
-
 Matrix Matrix::inverse() const {
     // Verificar si la matriz es cuadrada
     if (fil != col) {
         std::cerr << "La matriz no es cuadrada, no se puede calcular la inversa." << std::endl;
-        return Matrix(fil, col); // Devolver una matriz vacía o una copia de la matriz original
+        exit(EXIT_FAILURE);
     }
 
-    int n = fil; // Dimensión de la matriz cuadrada
-    Matrix result(n, n); // Matriz para almacenar la inversa
+    int size = fil;
+    Matrix identity = createIdentityMatrix(size);
+    Matrix augmentedMatrix(size, size * 2);
 
-    // Copiar la matriz actual a una matriz temporal para no modificarla
-    Matrix temp(*this);
-
-    // Crear una matriz identidad para almacenar los elementos de la matriz inversa
-    Matrix identity(n, n);
-    for (int i = 1; i <= n; ++i) {
-        identity(i, i) = 1.0;
-    }
-
-    // Algoritmo de eliminación gaussiana para calcular la inversa
-    for (int i = 1; i <= n; ++i) {
-        // Dividir la fila i entre el elemento de la diagonal para hacerlo 1
-        double divisor = temp(i, i);
-        for (int j = 1; j <= n; ++j) {
-            temp(i, j) /= divisor;
-            identity(i, j) /= divisor;
+    // Construir la matriz aumentada [A | I]
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            augmentedMatrix(i + 1, j + 1) = matrix[i][j];
+            augmentedMatrix(i + 1, j + 1 + size) = identity(i + 1, j + 1);
         }
+    }
 
-        // Restar múltiplos de la fila i de otras filas para hacer ceros debajo de la diagonal
-        for (int k = 1; k <= n; ++k) {
+    // Aplicar eliminación de Gauss-Jordan
+    for (int i = 1; i <= size; ++i) {
+        // Dividir la fila i por el pivote
+        double pivot = augmentedMatrix(i, i);
+        for (int j = 1; j <= size * 2; ++j) {
+            augmentedMatrix(i, j) /= pivot;
+        }
+        // Hacer ceros en las demás filas debajo del pivote
+        for (int k = 1; k <= size; ++k) {
             if (k != i) {
-                double factor = temp(k, i);
-                for (int j = 1; j <= n; ++j) {
-                    temp(k, j) -= factor * temp(i, j);
-                    identity(k, j) -= factor * identity(i, j);
+                double factor = augmentedMatrix(k, i);
+                for (int j = 1; j <= size * 2; ++j) {
+                    augmentedMatrix(k, j) -= factor * augmentedMatrix(i, j);
                 }
             }
         }
     }
 
-    // La matriz identity ahora contiene la inversa
-    return identity;
+    // Extraer la matriz inversa de la parte derecha de la matriz aumentada
+    Matrix inverse(size, size);
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            inverse(i + 1, j + 1) = augmentedMatrix(i + 1, j + 1 + size);
+        }
+    }
+
+    return inverse;
 }
+
 
 Matrix Matrix::createIdentityMatrix(int size) {
     Matrix identity(size, size);

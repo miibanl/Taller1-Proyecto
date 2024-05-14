@@ -13,12 +13,21 @@ void MeasUpdate(Matrix& x, Matrix& z, Matrix& g, Matrix& s, Matrix& G, Matrix& P
         Inv_W(i, i) = s(1,i) * s(1,i);    //% Inverse weight(measurement covariance)
     }
 
+    G.print();
+    Matrix a= P*G.transpose();
+    //Matrix b= (Inv_W+G*P*G.transpose()).inverse();
+
+
+    a.print();
+    //b.print();
+
     //% Kalman gain
-    K = P*G.transpose()*(Inv_W+G*P*G.transpose()).inverse();
+    //K = a*c;
 
     //% State update
-    x = x + K*(z-g);
+    //x.print();
+    //x = x + K*(z-g);
 
     //% Covariance update
-    P = (Matrix::createIdentityMatrix(n)-K*G)*P;
+    //P = (Matrix::createIdentityMatrix(n)-K*G)*P;
 }
