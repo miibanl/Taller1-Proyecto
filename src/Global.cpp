@@ -33,10 +33,9 @@ Matrix *Global::Cnm;
 Matrix *Global::Snm;
 
 void Global::GGM03S(){
-    Matrix *aux = new Matrix(6, 1);
-    Global::eopdata = new Matrix(181, 181);
-    Global::eopdata = new Matrix(181, 181);
-
+    Matrix *aux = new Matrix(6, 16471);
+    Global::Cnm = new Matrix(181, 181);
+    Global::Snm = new Matrix(181, 181);
 
     FILE *fid = fopen("../data/GGM03S.txt","r");
     if (fid == nullptr) {
@@ -56,13 +55,14 @@ void Global::GGM03S(){
                    &((*aux)(1, 1)), &((*aux)(2, 1)), &((*aux)(3, 1)),
                    &((*aux)(4, 1)), &((*aux)(5, 1)), &((*aux)(6, 1)));
 
-            (*Global::Cnm)(n+1,m+1)=(*aux)(3,1);
-            (*Global::Cnm)(n+1,m+1)=(*aux)(4,1);
+            (*Global::Cnm)(n+1,m+1) = (*aux)(3,1); // Asigna valores a Cnm
+            (*Global::Snm)(n+1,m+1) = (*aux)(4,1); // Asigna valores a Snm
         }
     }
 
     fclose(fid);
 }
+
 
 Matrix *Global::PC;
 

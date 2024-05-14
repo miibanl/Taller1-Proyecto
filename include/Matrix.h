@@ -21,8 +21,13 @@ class Matrix
 
 
         double& operator()(int i, int j) const;
- 
-        void print();
+
+        static Matrix cross(const Matrix& a, const Matrix& b);
+        static double dot(const Matrix &a, const Matrix &b);
+
+
+
+    void print();
 
         double norm() const;
         int getRows() const;
@@ -33,6 +38,7 @@ class Matrix
         int fil;
         int col;
         double **matrix;
+
 };
 
 #endif

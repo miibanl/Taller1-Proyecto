@@ -31,6 +31,11 @@
 #include "./include/EqnEquinox.h"
 #include "./include/gast.h"
 #include "./include/GHAMatrix.h"
+#include "./include/AccelHarmonic.h"
+#include "./include/LTC.h"
+#include "./include/elements.h"
+
+
 
 
 
@@ -499,6 +504,78 @@ int GHAMatrix() {
 }
 
 
+int AccelHarmonic() {/*
+    Matrix sol(1,3);
+
+    Matrix r(1,3);
+    r(1,1)=7000000;
+    r(1,2)=0;
+    r(1,3)=0;
+
+    Matrix E(3,3);
+    E(1,1)=1;
+    E(1,2)=0;
+    E(1,3)=0;
+    E(2,1)=0;
+    E(2,2)=1;
+    E(2,3)=0;
+    E(3,1)=0;
+    E(3,2)=0;
+    E(3,3)=1;
+
+
+    sol=AccelHarmonic(r,E,2,2);
+
+    _assert(fabs(sol(1,1) - -8.14576607065686) < TOL_);
+    _assert(fabs(sol(1,2) -  -3.66267894892037e-05) < TOL_);
+    _assert(fabs(sol(1,3) -  -5.84508413583961e-09) < TOL_);
+*/
+
+    return 0;
+}
+
+int LTC() {
+    Matrix sol(3,3);
+    sol=LTC(0.785398163397448,0.523598775598299);
+
+    _assert(fabs(sol(1,1) - -0.707106781186547) < TOL_);
+    _assert(fabs(sol(1,2) -  0.707106781186548) < TOL_);
+    _assert(fabs(sol(1,3) -  0) < TOL_);
+    _assert(fabs(sol(2,1) -  -0.353553390593274) < TOL_);
+    _assert(fabs(sol(2,2) -  -0.353553390593274) < TOL_);
+    _assert(fabs(sol(2,3) -  0.866025403784439) < TOL_);
+    _assert(fabs(sol(3,1) -  0.612372435695795) < TOL_);
+    _assert(fabs(sol(3,2) -  0.612372435695794) < TOL_);
+    _assert(fabs(sol(3,3) -  0.5) < TOL_);
+
+    return 0;
+}
+
+int elements() {
+    Matrix y(1,6);
+    y(1,1)=7000;
+    y(1,2)=5000;
+    y(1,3)=10;
+    y(1,4)=0;
+    y(1,5)=7000;
+    y(1,6)=50;
+
+    Matrix sol(1,7);
+    sol=elements(y);
+
+    cout<<sol(1,6)<<endl;
+    _assert(fabs(sol(1,1) - 6.02396456836168) < TOL_);
+    _assert(fabs(sol(1,2) -  4303.44106929666) < TOL_);
+    _assert(fabs(sol(1,3) -  0.999299853996234) < TOL_);
+    _assert(fabs(sol(1,4) -  0.00803193693149894) < TOL_);
+    _assert(fabs(sol(1,5) -  0.475010756265097) < TOL_);
+    _assert(fabs(sol(1,6) -  3.28733653782776) < TOL_);
+    _assert(fabs(sol(1,7) -  3.08812323724874) < TOL_);
+
+
+    return 0;
+}
+
 
 
 int all_tests()
@@ -531,6 +608,9 @@ int all_tests()
     _verify(EqnEquinox);
     _verify(gast);
     _verify(GHAMatrix);
+    _verify(AccelHarmonic);
+    _verify(LTC);
+    _verify(elements);
 
 
 

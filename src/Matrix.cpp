@@ -162,4 +162,30 @@ Matrix operator*(double scalar, const Matrix& matrix) {
     return result;
 }
 
+Matrix Matrix::cross(const Matrix& a, const Matrix& b) {
+
+    double x = a(1, 2) * b(1, 3) - a(1, 3) * b(1, 2);
+    double y = a(1, 3) * b(1, 1) - a(1, 1) * b(1, 3);
+    double z = a(1, 1) * b(1, 2) - a(1, 2) * b(1, 1);
+
+    Matrix result(1, 3);
+    result(1, 1) = x;
+    result(1, 2) = y;
+    result(1, 3) = z;
+
+    return result;
+}
+
+
+double Matrix::dot(const Matrix& a, const Matrix& b) {
+    double result = 0.0;
+
+    for (int i = 1; i <= 3; ++i) {
+        result += a(1, i) * b(1, i);
+    }
+
+    return result;
+}
+
+
 
