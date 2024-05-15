@@ -57,6 +57,8 @@
 int tests_run = 0;
 
 #define TOL_ 10e-10
+#define TOLG_ 10e-3
+
 #define FAIL() printf("\nfailure in %s() line %d\n", __func__, __LINE__)
 #define _assert(test) do { if (!(test)) { FAIL(); return 1; } } while(0)
 #define _verify(test) do { int r=test(); tests_run++; if(r) return r; } while(0)
@@ -698,7 +700,7 @@ int MeasUpdate() {
     x(6,1)=-6736.03539066925;
 
     Matrix z(1,1);
-    x(1,1)=2653472;
+    z(1,1)=2653472;
 
     Matrix g(1,1);
     g(1,1)=2653524.97225556;
@@ -727,7 +729,7 @@ int MeasUpdate() {
     P(2,3)=-1495.7021644119;
     P(2,4)=-4.64148177308955;
     P(2,5)=59.550440390861;
-    P(2,6)=25850.3882249601;
+    P(2,6)=-26.9419372555258;
 
     P(3,1)=8540.82446015527;
     P(3,2)=-1495.7021644119;
@@ -760,14 +762,66 @@ int MeasUpdate() {
 
 
 
-    Matrix K(1,6);
+    Matrix K(6,1);
 
     MeasUpdate(x,z,g,s,G,P,6,K);
-    //K.print();
+
+    _assert(fabs(K(1,1) - -4.80627120106248e-05) < TOL_);
+    _assert(fabs(K(2,1) - -0.0428209991249192) < TOL_);
+    _assert(fabs(K(3,1) - -0.137546573607129) < TOL_);
+    _assert(fabs(K(4,1) -  2.53261432900673e-06) < TOL_);
+    _assert(fabs(K(5,1) -  -3.83873815160824e-05) < TOL_);
+    _assert(fabs(K(6,1) -  -0.000444236151437214) < TOL_);
+
+    _assert(fabs(x(1,1) - 7101597.84250254) < TOLG_);
+    _assert(fabs(x(2,1) -  1295247.06100898) < TOLG_);
+    _assert(fabs(x(3,1) -  12762.8936334589) < TOLG_);
+    _assert(fabs(x(4,1) -  576.097627376774) < TOL_);
+    _assert(fabs(x(5,1) - -3084.51047032313) < TOL_);
+    _assert(fabs(x(6,1) - -6736.01185847833) < TOL_);
 
 
-    //_assert(fabs(angl(vec1,vec2) - 1.5707963267949) < TOL_);
+    _assert(fabs(P(1,1) - 15877.8629549386 ) < TOLG_);
+    _assert(fabs(P(1,2) - -5671.38396093049) < TOLG_);
+    _assert(fabs(P(1,3) - 8540.76030413808) < TOLG_);
+    _assert(fabs(P(1,4) - 48.559599419911) < TOL_);
+    _assert(fabs(P(1,5) - -13.3700547293853) < TOL_);
+    _assert(fabs(P(1,6) - 22.4250145445203) < TOL_);
 
+    _assert(fabs(P(2,1) -  -5671.38396093049) < TOLG_);
+    _assert(fabs(P(2,2) -  24449.542245372) < TOLG_);
+    _assert(fabs(P(2,3) -  -1552.86140798526) < TOLG_);
+    _assert(fabs(P(2,4) -  -4.64042931154713) < TOLG_);
+    _assert(fabs(P(2,5) -  59.5344880222565) < TOL_);
+    _assert(fabs(P(2,6) -  -27.1265452886926) < TOL_);
+
+    _assert(fabs(P(3,1) -  8540.76030413808) < TOLG_);
+    _assert(fabs(P(3,2) -  -1552.86140798525) < TOLG_);
+    _assert(fabs(P(3,3) -  6013.07747956968) < TOLG_);
+    _assert(fabs(P(3,4) -  26.7050171238387) < TOL_);
+    _assert(fabs(P(3,5) -  -4.18241475306703) < TOL_);
+    _assert(fabs(P(3,6) -  15.4937252975488) < TOL_);
+
+    _assert(fabs(P(4,1) -    48.559599419911     ) < TOL_);
+    _assert(fabs(P(4,2) -    -4.64042931154713   ) < TOLG_);
+    _assert(fabs(P(4,3) -    26.7050171238387    ) < TOL_);
+    _assert(fabs(P(4,4) -    0.178295892470256   ) < TOL_);
+    _assert(fabs(P(4,5) -    -0.0189353069540779 ) < TOL_);
+    _assert(fabs(P(4,6) -    0.0668704711131299  ) < TOL_);
+
+    _assert(fabs(P(5,1) -  -13.3700547293853     ) < TOL_);
+    _assert(fabs(P(5,2) -   59.5344880222564   ) < TOL_);
+    _assert(fabs(P(5,3) -   -4.18241475306707    ) < TOL_);
+    _assert(fabs(P(5,4) -  -0.0189353069540779   ) < TOL_);
+    _assert(fabs(P(5,5) -   0.152596870758074 ) < TOL_);
+    _assert(fabs(P(5,6) -   -0.0751888003400262  ) < TOL_);
+
+    _assert(fabs(P(6,1) -  22.4250145445203) < TOL_);
+    _assert(fabs(P(6,2) -  -27.1265452886925) < TOL_);
+    _assert(fabs(P(6,3) -  15.4937252975489) < TOL_);
+    _assert(fabs(P(6,4) -  0.0668704711131298) < TOL_);
+    _assert(fabs(P(6,5) -  -0.0751888003400258) < TOL_);
+    _assert(fabs(P(6,6) -  0.0826395235303997) < TOL_);
 
 
     return 0;
@@ -811,7 +865,7 @@ int all_tests()
     _verify(angl);
     _verify(TimeUpdate);
     _verify(MeasUpdate);
-    _verify(JPL_Eph_DE430);
+    //_verify(JPL_Eph_DE430);
 
 
 

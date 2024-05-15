@@ -192,16 +192,18 @@ double Matrix::dot(const Matrix& a, const Matrix& b) {
 }
 
 Matrix Matrix::transpose() const {
-    Matrix result(fil, col);
+    Matrix result(col, fil);
 
-    for (int i = 0; i < col; ++i) {
-        for (int j = 0; j < fil; ++j) {
-            result.matrix[i][j] = matrix[j][i];
+
+    for (int i = 0; i < fil; ++i) {
+        for (int j = 0; j < col; ++j) {
+            result.matrix[j][i] = matrix[i][j];
         }
     }
 
     return result;
 }
+
 
 Matrix Matrix::operator+(double scalar) {
     Matrix result(fil, col);
@@ -262,6 +264,8 @@ Matrix Matrix::inverse() const {
 
     return inverse;
 }
+
+
 
 
 Matrix Matrix::createIdentityMatrix(int size) {

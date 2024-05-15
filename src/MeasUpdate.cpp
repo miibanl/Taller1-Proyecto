@@ -7,6 +7,7 @@
 
 void MeasUpdate(Matrix& x, Matrix& z, Matrix& g, Matrix& s, Matrix& G, Matrix& P, int n, Matrix& K){
 
+
     int m = z.getCols();
     Matrix Inv_W(m,m);
 
@@ -14,22 +15,43 @@ void MeasUpdate(Matrix& x, Matrix& z, Matrix& g, Matrix& s, Matrix& G, Matrix& P
         Inv_W(i, i) = s(1,i) * s(1,i);    //% Inverse weight(measurement covariance)
     }
 
-    G.print();
     Matrix a= P*G.transpose();
-    //Matrix b= (Inv_W+G*P*G.transpose()).inverse();
 
+    Matrix aux(6,1);
+    for (int i = 1; i<=6 ; ++i) {
+        aux(i,1)=a(i,1);
+    }
 
-    a.print();
-    //b.print();
+    Matrix b= (Inv_W+G*P*G.transpose()).inverse();
+
 
     //% Kalman gain
-    //K = a*c;
+    if(b.getRows()==1 && b.getCols()==1) {
+        for (int i = 1; i <= aux.getRows(); i++) {
+            K(i, 1) = aux(i, 1) * b(1, 1);
+        }
+    }else{
+        K = aux*b;
+    }
 
     //% State update
-    //x.print();
-    //x = x + K*(z-g);
+    x = x + K*(z-g);
 
+    Matrix auxK(K.getRows(),K.getRows());
+    Matrix auxG(G.getCols(),G.getCols());
+
+    for (int i = 1; i <= K.getRows(); ++i) {
+        auxK(i,1)=K(i,1);
+    }
+    for (int i = 1; i <= G.getCols(); ++i) {
+        auxG(1,i)=G(1,i);
+    }
+
+
+    Matrix aux2=auxK*auxG;
     //% Covariance update
-    //P = (Matrix::createIdentityMatrix(n)-K*G)*P;
+    P = (Matrix::createIdentityMatrix(n)-aux2)*P;
+    
+
 
 }
