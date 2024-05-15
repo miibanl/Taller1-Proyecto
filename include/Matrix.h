@@ -29,6 +29,14 @@ class Matrix
         Matrix transpose() const;
         Matrix inverse() const;
         static Matrix createIdentityMatrix(int size);
+        static Matrix range(int start, int step, int end);
+        Matrix subMatrix(int row);
+    Matrix subMatrix(int row, int startCol, int endCol);
+    static Matrix concatenateHorizontal(const Matrix& matrix1, const Matrix& matrix2);
+
+
+
+
 
 
 
@@ -41,6 +49,7 @@ class Matrix
         double norm() const;
         int getRows() const;
         int getCols() const;
+
 
 
 private:

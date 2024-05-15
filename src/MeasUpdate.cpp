@@ -6,6 +6,7 @@
 
 
 void MeasUpdate(Matrix& x, Matrix& z, Matrix& g, Matrix& s, Matrix& G, Matrix& P, int n, Matrix& K){
+
     int m = z.getCols();
     Matrix Inv_W(m,m);
 
@@ -30,4 +31,5 @@ void MeasUpdate(Matrix& x, Matrix& z, Matrix& g, Matrix& s, Matrix& G, Matrix& P
 
     //% Covariance update
     //P = (Matrix::createIdentityMatrix(n)-K*G)*P;
+
 }

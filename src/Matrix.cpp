@@ -280,3 +280,78 @@ Matrix Matrix::createIdentityMatrix(int size) {
     return identity;
 }
 
+Matrix Matrix::subMatrix(int row) {
+    if (row < 1 || row > fil) {
+        std::cerr << "Índice de fila fuera de rango." << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    Matrix sub(1, col); // Crear una nueva matriz con una sola fila
+
+    for (int j = 0; j < col; ++j) {
+        sub(1, j + 1) = matrix[row - 1][j];
+    }
+
+    return sub;
+}
+
+
+Matrix Matrix::range(int start, int step, int end) {
+    if ((end - start) % step != 0) {
+        std::cerr << "El rango no es divisible uniformemente por el paso." << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    int numElements = ((end - start) / step) + 1; // Calcular el número de elementos en el rango
+    Matrix result(1, numElements);
+
+    int value = start;
+    for (int i = 0; i < numElements; ++i) {
+        result(1, i + 1) = value;
+        value += step;
+    }
+
+    return result;
+}
+
+Matrix Matrix::subMatrix(int row, int startCol, int endCol) {
+    if (row < 1 || row > fil || startCol < 1 || startCol > col || endCol < 1 || endCol > col || startCol > endCol) {
+        std::cerr << "Índices de fila o columna fuera de rango." << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    Matrix sub(1, endCol - startCol + 1); // Crear una nueva matriz con una sola fila y el rango de columnas especificado
+
+    for (int j = startCol - 1, subCol = 0; j < endCol; ++j, ++subCol) {
+        sub(1, subCol + 1) = matrix[row - 1][j];
+    }
+
+    return sub;
+}
+
+
+Matrix Matrix::concatenateHorizontal(const Matrix& matrix1, const Matrix& matrix2) {
+    if (matrix1.getRows() != matrix2.getRows()) {
+        std::cerr << "Las matrices tienen diferente número de filas." << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    int newCols = matrix1.getCols() + matrix2.getCols();
+    Matrix result(matrix1.getRows(), newCols);
+
+    for (int i = 1; i <= matrix1.getRows(); ++i) {
+        for (int j = 1; j <= matrix1.getCols(); ++j) {
+            result(i, j) = matrix1(i, j);
+        }
+        for (int j = 1; j <= matrix2.getCols(); ++j) {
+            result(i, matrix1.getCols() + j) = matrix2(i, j);
+        }
+    }
+
+    return result;
+}
+
+
+
+
+
