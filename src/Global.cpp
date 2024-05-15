@@ -32,31 +32,26 @@ void Global::eop19620101(int fila) {
 Matrix *Global::Cnm;
 Matrix *Global::Snm;
 
-void Global::GGM03S(){
-    Matrix *aux = new Matrix(6, 16471);
+void Global::GGM03S () {
     Global::Cnm = new Matrix(181, 181);
     Global::Snm = new Matrix(181, 181);
 
+    Matrix *aux = new Matrix(6, 1);
+
+
     FILE *fid = fopen("../data/GGM03S.txt","r");
-    if (fid == nullptr) {
+    if (fid == NULL) {
         printf("Error al abrir el fichero.");
         exit(EXIT_FAILURE);
     }
 
-    for (int i = 1; i <= 16471; i++) {
-        fscanf(fid, "%lf %lf %lf %lf %lf %lf",
-               &((*aux)(1, i)), &((*aux)(2, i)), &((*aux)(3, i)),
-               &((*aux)(4, i)), &((*aux)(5, i)), &((*aux)(6, i)));
-    }
+    for (int n = 0; n <= 180; n++) {
+        for (int m = 0; m <= n; m++) {
+            fscanf(fid, "%lf %lf %lf %lf %lf %lf", &((*aux)(1,1)), &((*aux)(2,1)), &((*aux)(3,1)),
+                   &((*aux)(4,1)), &((*aux)(5,1)), &((*aux)(6,1)));
 
-    for(int n=0;n<=180;n++){
-        for(int m=0;m<=n;m++){
-            fscanf(fid, "%lf %lf %lf %lf %lf %lf",
-                   &((*aux)(1, 1)), &((*aux)(2, 1)), &((*aux)(3, 1)),
-                   &((*aux)(4, 1)), &((*aux)(5, 1)), &((*aux)(6, 1)));
-
-            (*Global::Cnm)(n+1,m+1) = (*aux)(3,1); // Asigna valores a Cnm
-            (*Global::Snm)(n+1,m+1) = (*aux)(4,1); // Asigna valores a Snm
+            (*Global::Cnm)(n + 1, m + 1) = (*aux)(3,1);
+            (*Global::Snm)(n + 1, m + 1) = (*aux)(4,1);
         }
     }
 

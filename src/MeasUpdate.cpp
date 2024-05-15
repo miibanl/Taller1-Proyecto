@@ -51,7 +51,7 @@ void MeasUpdate(Matrix& x, Matrix& z, Matrix& g, Matrix& s, Matrix& G, Matrix& P
     Matrix aux2=auxK*auxG;
     //% Covariance update
     P = (Matrix::createIdentityMatrix(n)-aux2)*P;
-    
+
 
 
 }
