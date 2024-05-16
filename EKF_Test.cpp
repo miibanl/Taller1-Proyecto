@@ -38,6 +38,8 @@
 #include "./include/TimeUpdate.h"
 #include "./include/MeasUpdate.h"
 #include "./include/JPL_Eph_DE430.h"
+#include "./include/G_AccelHarmonic.h"
+#include "./include/VarEqn.h"
 
 
 
@@ -826,6 +828,144 @@ int MeasUpdate() {
     return 0;
 }
 
+int G_AccelHarmonic(){
+
+    Matrix r(3,1);
+    r(1,1)=7101800.90695316;
+    r(2,1)=1293997.58115302;
+    r(3,1)=10114.0149489548;
+
+    Matrix U(3,3);
+    r(1,1)=-0.984320311904791;
+    r(1,2)=0.17638970840918;
+    r(1,3)=-0.000440838949610109;
+    r(2,1)=-0.176389673507182;
+    r(2,2)=-0.984320409906027;
+    r(2,3)=-0.000117142904888635;
+    r(3,1)=-0.000454589578418276;
+    r(3,2)=-3.75467022865179e-05;
+    r(3,3)=0.999999895969275;
+
+    Matrix G(3,3);
+    G=G_AccelHarmonic(r,U,20,20);
+
+    _assert(fabs(G(1,1) -  2.02233500345983e-06  ) < TOL_);
+    _assert(fabs(G(1,2) -  5.61803300325181e-07  ) < TOL_);
+    _assert(fabs(G(1,3) -  4.3985650677314e-09  ) < TOL_);
+    _assert(fabs(G(2,1) -   5.61803300325181e-07   ) < TOL_);
+    _assert(fabs(G(2,2) -  -9.58631633629636e-07   ) < TOL_);
+    _assert(fabs(G(2,3) -   8.05635336220689e-10   ) < TOL_);
+    _assert(fabs(G(3,1) -   4.3985650677314e-09   ) < TOL_);
+    _assert(fabs(G(3,2) -   8.05635336220689e-10   ) < TOL_);
+    _assert(fabs(G(3,3) -   -1.06370336962376e-06   ) < TOL_);
+
+
+    return 0;
+}
+
+int VarEqn(){
+
+    double x=5.38970808087706;
+
+    Matrix yPhi(42,1);
+    yPhi(1,1)=          7101800.90695316;
+    yPhi(2,1)=          1293997.58115302;
+    yPhi(3,1)=          10114.0149489548;
+    yPhi(4,1)=          573.068082065571;
+    yPhi(5,1)=          -3085.1573695314;
+    yPhi(6,1)=         -6736.03068347156;
+    yPhi(7,1)=          1.00002934697411;
+    yPhi(8,1)=      8.22733917762449e-06;
+    yPhi(9,1)=      2.17104933083753e-07;
+    yPhi(10,1)=      1.08925458228649e-05;
+    yPhi(11,1)=      3.04673932149814e-06;
+    yPhi(12,1)=      6.63504292791872e-08;
+    yPhi(13,1)=      8.22733946382083e-06;
+    yPhi(14,1)=         0.999986101965304;
+    yPhi(15,1)=      3.99927484115915e-08;
+    yPhi(16,1)=      3.04673960999239e-06;
+    yPhi(17,1)=      -5.1596062485806e-06;
+    yPhi(18,1)=      1.22075292635603e-08;
+    yPhi(19,1)=      2.17105644844433e-07;
+    yPhi(20,1)=      3.99928710091171e-08;
+    yPhi(21,1)=         0.999984551298692;
+    yPhi(22,1)=      6.63510879597062e-08;
+    yPhi(23,1)=      1.22076471907108e-08;
+    yPhi(24,1)=     -5.73276287737297e-06;
+    yPhi(25,1)=          5.38976081674751;
+    yPhi(26,1)=      1.47507305148925e-05;
+    yPhi(27,1)=       3.2124178784685e-07;
+    yPhi(28,1)=          1.00002936035844;
+    yPhi(29,1)=      8.19365458222297e-06;
+    yPhi(30,1)=      1.40504658042212e-07;
+    yPhi(31,1)=      1.47507306730623e-05;
+    yPhi(32,1)=          5.38968310056196;
+    yPhi(33,1)=      5.90697769683887e-08;
+    yPhi(34,1)=      8.19365484998955e-06;
+    yPhi(35,1)=         0.999986089176289;
+    yPhi(36,1)=      2.58022975055205e-08;
+    yPhi(37,1)=      3.21242426506198e-07;
+    yPhi(38,1)=      5.90698816697904e-08;
+    yPhi(39,1)=          5.38968032557769;
+    yPhi(40,1)=      1.40505367755009e-07;
+    yPhi(41,1)=      2.58024242569477e-08;
+    yPhi(42,1)=         0.999984550703337;
+
+
+    Matrix yPhip(42,1);
+
+    yPhip= VarEqn(x,yPhi);
+
+    _assert(fabs(yPhip(1,1) -            573.068082065571) < TOL_);
+    _assert(fabs(yPhip(2,1) -            -3085.1573695314) < TOL_);
+    _assert(fabs(yPhip(3,1) -           -6736.03068347156) < TOL_);
+    _assert(fabs(yPhip(4,1) -           -7.53489822593659) < TOL_);
+    _assert(fabs(yPhip(5,1) -           -1.37294429126637) < TOL_);
+    _assert(fabs(yPhip(6,1) -         -0.0107597986473573) < TOL_);
+    _assert(fabs(yPhip(7,1) -        1.08925458228649e-05) < TOL_);
+    _assert(fabs(yPhip(8,1) -        3.04673932149814e-06) < TOL_);
+    _assert(fabs(yPhip(9,1) -        6.63504292791872e-08) < TOL_);
+    _assert(fabs(yPhip(10,1) -       2.02239897597407e-06 ) < TOL_);
+    _assert(fabs(yPhip(11,1) -       5.61811900739403e-07 ) < TOL_);
+    _assert(fabs(yPhip(12,1) -       4.39846387071925e-09 ) < TOL_);
+    _assert(fabs(yPhip(13,1) -       3.04673960999239e-06 ) < TOL_);
+    _assert(fabs(yPhip(14,1) -       -5.1596062485806e-06 ) < TOL_);
+    _assert(fabs(yPhip(15,1) -       1.22075292635603e-08 ) < TOL_);
+    _assert(fabs(yPhip(16,1) -       5.61812130531832e-07 ) < TOL_);
+    _assert(fabs(yPhip(17,1) -      -9.58613688355248e-07 ) < TOL_);
+    _assert(fabs(yPhip(18,1) -       8.05616496874072e-10 ) < TOL_);
+    _assert(fabs(yPhip(19,1) -       6.63510879597062e-08 ) < TOL_);
+    _assert(fabs(yPhip(20,1) -       1.22076471907108e-08 ) < TOL_);
+    _assert(fabs(yPhip(21,1) -      -5.73276287737297e-06 ) < TOL_);
+    _assert(fabs(yPhip(22,1) -        4.3989586440854e-09 ) < TOL_);
+    _assert(fabs(yPhip(23,1) -        8.0570652243754e-10 ) < TOL_);
+    _assert(fabs(yPhip(24,1) -      -1.06368693580095e-06 ) < TOL_);
+    _assert(fabs(yPhip(25,1) -           1.00002936035844 ) < TOL_);
+    _assert(fabs(yPhip(26,1) -       8.19365458222297e-06 ) < TOL_);
+    _assert(fabs(yPhip(27,1) -       1.40504658042212e-07 ) < TOL_);
+    _assert(fabs(yPhip(28,1) -       1.08999102484068e-05 ) < TOL_);
+    _assert(fabs(yPhip(29,1) -       3.02797127455401e-06 ) < TOL_);
+    _assert(fabs(yPhip(30,1) -       2.37068516291711e-08 ) < TOL_);
+    _assert(fabs(yPhip(31,1) -       8.19365484998955e-06 ) < TOL_);
+    _assert(fabs(yPhip(32,1) -          0.999986089176289 ) < TOL_);
+    _assert(fabs(yPhip(33,1) -       2.58022975055205e-08 ) < TOL_);
+    _assert(fabs(yPhip(34,1) -       3.02797158238785e-06 ) < TOL_);
+    _assert(fabs(yPhip(35,1) -      -5.16671242838099e-06 ) < TOL_);
+    _assert(fabs(yPhip(36,1) -       4.34211424997424e-09 ) < TOL_);
+    _assert(fabs(yPhip(37,1) -       1.40505367755009e-07 ) < TOL_);
+    _assert(fabs(yPhip(38,1) -       2.58024242569477e-08 ) < TOL_);
+    _assert(fabs(yPhip(39,1) -          0.999984550703337 ) < TOL_);
+    _assert(fabs(yPhip(40,1) -       2.37075424517834e-08 ) < TOL_);
+    _assert(fabs(yPhip(41,1) -       4.34224077001707e-09 ) < TOL_);
+    _assert(fabs(yPhip(42,1) -      -5.73302112205129e-06 ) < TOL_);
+
+
+
+
+
+    return 0;
+}
+
 
 
 int all_tests()
@@ -865,6 +1005,8 @@ int all_tests()
     _verify(TimeUpdate);
     _verify(MeasUpdate);
     //_verify(JPL_Eph_DE430);
+    _verify(AccelHarmonic);
+    _verify(VarEqn);
 
 
 
