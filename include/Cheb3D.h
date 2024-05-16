@@ -10,6 +10,6 @@
 #include <stdexcept>
 
 
-Matrix Cheb3D(double t, int n, double Ta, double Tb, const Matrix& Cx, const Matrix& Cy, const Matrix& Cz);
+Matrix Cheb3D(double t, int N, double Ta, double Tb, const Matrix& Cx, const Matrix& Cy, const Matrix& Cz);
 
 #endif //PROYECTO_CHEB3D_H

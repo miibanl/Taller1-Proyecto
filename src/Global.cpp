@@ -62,7 +62,7 @@ void Global::GGM03S () {
 Matrix *Global::PC;
 
 void Global::DE430Coeff(){
-    Global::PC = new Matrix(1020, 2285);
+    Global::PC = new Matrix(2285, 1020);
 
 
     FILE *fid = fopen("../data/DE430Coeff.txt","r");
@@ -97,4 +97,14 @@ void Global::GEOS3(int fila) {
                &((*geos3)(i,1)));
     }
 }
+
+
+
+double Global::AuxParam::Mjd_UTC = 0.0;
+double Global::AuxParam::Mjd_TT = 0.0;
+int Global::AuxParam::n = 0;
+int Global::AuxParam::m = 0;
+int Global::AuxParam::sun = 0;
+int Global::AuxParam::moon = 0;
+int Global::AuxParam::planets = 0;
 

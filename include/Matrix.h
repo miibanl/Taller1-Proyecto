@@ -33,8 +33,9 @@ class Matrix
 
         static Matrix range(int start, int step, int end);
         Matrix subMatrix(int row);
-    Matrix subMatrix(int row, int startCol, int endCol);
     static Matrix concatenateHorizontal(const Matrix& matrix1, const Matrix& matrix2);
+    Matrix subMatrix(int startRow, int endRow, int startCol, int endCol);
+    void copyColumnFrom(const Matrix& source, int sourceCol, int destCol);
 
 
 

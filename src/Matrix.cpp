@@ -299,6 +299,26 @@ Matrix Matrix::subMatrix(int row) {
     return sub;
 }
 
+Matrix Matrix::subMatrix(int startRow, int endRow, int startCol, int endCol) {
+    if (startRow < 1 || endRow > fil || startCol < 1 || endCol > col || startRow > endRow || startCol > endCol) {
+        std::cerr << "Indices de fila o columna fuera de rango." << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    int numRows = endRow - startRow + 1;
+    int numCols = endCol - startCol + 1;
+    Matrix sub(numRows, numCols);
+
+    for (int i = startRow - 1, subRow = 0; i < endRow; ++i, ++subRow) {
+        for (int j = startCol - 1, subCol = 0; j < endCol; ++j, ++subCol) {
+            sub(subRow + 1, subCol + 1) = matrix[i][j];
+        }
+    }
+
+    return sub;
+}
+
+
 
 Matrix Matrix::range(int start, int step, int end) {
     if ((end - start) % step != 0) {
@@ -318,20 +338,7 @@ Matrix Matrix::range(int start, int step, int end) {
     return result;
 }
 
-Matrix Matrix::subMatrix(int row, int startCol, int endCol) {
-    if (row < 1 || row > fil || startCol < 1 || startCol > col || endCol < 1 || endCol > col || startCol > endCol) {
-        std::cerr << "Índices de fila o columna fuera de rango." << std::endl;
-        exit(EXIT_FAILURE);
-    }
 
-    Matrix sub(1, endCol - startCol + 1); // Crear una nueva matriz con una sola fila y el rango de columnas especificado
-
-    for (int j = startCol - 1, subCol = 0; j < endCol; ++j, ++subCol) {
-        sub(1, subCol + 1) = matrix[row - 1][j];
-    }
-
-    return sub;
-}
 
 
 Matrix Matrix::concatenateHorizontal(const Matrix& matrix1, const Matrix& matrix2) {
@@ -354,6 +361,23 @@ Matrix Matrix::concatenateHorizontal(const Matrix& matrix1, const Matrix& matrix
 
     return result;
 }
+
+
+void Matrix::copyColumnFrom(const Matrix& source, int sourceCol, int destCol) {
+    if (source.getRows() != fil || source.getCols() < sourceCol || destCol < 1 || destCol > col) {
+        std::cerr << "Tamanio o indices de columna fuera de rango." << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < fil; ++i) {
+        if (i < source.getRows()) {
+            matrix[i][destCol - 1] = source(i + 1, sourceCol);
+        } else {
+            matrix[i][destCol - 1] = 0.0; // Rellenar con ceros si la matriz fuente es más pequeña
+        }
+    }
+}
+
 
 
 

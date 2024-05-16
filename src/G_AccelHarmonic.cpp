@@ -26,25 +26,31 @@
 %
 %--------------------------------------------------------------------------
 */
-Matrix G_AccelHarmonic(const Matrix& r,const Matrix& U,int n_max,int m_max) {
+Matrix G_AccelHarmonic(Matrix& r,Matrix& U,int n_max,int m_max) {
 
     double d = 1.0;   //% Position increment [m]
 
     Matrix G(3, 3);
 
+    Matrix dr(3,1);
+
+
     //% Gradient
     for (int i = 1; i <= 3; i++) {
         //% Set offset in i-th component of the position vector
-        Matrix dr(3,1);
+        dr(1,1)=0.0;
+        dr(2,1)=0.0;
+        dr(3,1)=0.0;
+
         dr(i,1) = d;
         //% Acceleration difference
         Matrix aux1=r + dr / 2;
         Matrix aux2=r - dr / 2;
         Matrix da = AccelHarmonic(aux1, U, n_max, m_max) - AccelHarmonic(aux2, U, n_max, m_max);
         //% Derivative with respect to i-th axis
-        G(1,i) = (da / d)(1,i);
-        G(2,i) = (da / d)(2,i);
-        G(3,i) = (da / d)(3,i);
+        G(1,i) = (da / d)(1,1);
+        G(2,i) = (da / d)(2,1);
+        G(3,i) = (da / d)(3,1);
     }
 
     return G;

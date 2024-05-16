@@ -7,7 +7,15 @@
 
 
 #include "Matrix.h"
+#include "Global.h"
+#include "IERS.h"
+#include "TimeDiff.h"
+#include "PrecMatrix.h"
+#include "NutMatrix.h"
+#include "PoleMatrix.h"
+#include "GHAMatrix.h"
 
-Matrix VarEqn(double x, Matrix yPhi);
+
+Matrix VarEqn(double x,Matrix& yPhi);
 
 #endif //PROYECTO_VAREQN_H
