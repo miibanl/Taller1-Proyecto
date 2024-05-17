@@ -192,7 +192,7 @@ Matrix DEInteg(Matrix (*func)(double, Matrix&), double t, double tout, double re
             State_ = DE_STATE::DE_DONE; //% Set return code
             t = tout;             //% Set independent variable
             told = t;                //% Store independent variable
-            bool OldPermit = PermitTOUT;
+            OldPermit = PermitTOUT;
             return y;                       //% Normal exit
         }
 
