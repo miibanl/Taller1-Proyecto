@@ -33,8 +33,18 @@
 % Last modified:   2015/08/12   M. Mahooti
 %
 %--------------------------------------------------------------------------
-*//*
+*/
 Matrix Accel(double x, const Matrix& Y){
+
+    //USAR SOLO AL HACER LOS TEST
+    //Global::AuxParam::Mjd_UTC=49746.1163541665;
+    //Global::AuxParam::n = 20;
+    //Global::AuxParam::m = 20;
+    //Global::AuxParam::sun = 1;
+    //Global::AuxParam::moon = 1;
+    //Global::AuxParam::planets = 1;
+
+    Global::eop19620101(21413);
 
     Matrix iers = IERS(*Global::eopdata,(Global::AuxParam::Mjd_UTC + x/86400.0),'l');
     Matrix timediff = timeDiff(iers(1,3),iers(1,9));
@@ -47,22 +57,22 @@ Matrix Accel(double x, const Matrix& Y){
     Matrix E = PoleMatrix(iers(1,1),iers(1,2)) * GHAMatrix(Mjd_UT1) * T;
 
     double MJD_TDB = Mjday_TDB(Mjd_TT);
-    Matrix r_Mercury(1, 3);
-    Matrix r_Venus(1, 3);
-    Matrix r_Earth(1, 3);
-    Matrix r_Mars(1, 3);
-    Matrix r_Jupiter(1, 3);
-    Matrix r_Saturn(1, 3);
-    Matrix r_Uranus(1, 3);
-    Matrix r_Neptune(1, 3);
-    Matrix r_Pluto(1, 3);
-    Matrix r_Moon(1, 3);
-    Matrix r_Sun(1, 3);
+    Matrix r_Mercury(3, 1);
+    Matrix r_Venus(3, 1);
+    Matrix r_Earth(3, 1);
+    Matrix r_Mars(3, 1);
+    Matrix r_Jupiter(3, 1);
+    Matrix r_Saturn(3, 1);
+    Matrix r_Uranus(3, 1);
+    Matrix r_Neptune(3, 1);
+    Matrix r_Pluto(3, 1);
+    Matrix r_Moon(3, 1);
+    Matrix r_Sun(3, 1);
     JPL_Eph_DE430(MJD_TDB,r_Mercury,r_Venus,r_Earth,r_Mars,r_Jupiter,r_Saturn,r_Uranus,r_Neptune,r_Pluto,r_Moon,r_Sun);
 
-    Matrix auxY(1,3);
+    Matrix auxY(3,1);
     for(int i=1;i<=3;i++){
-        auxY(1,i)=Y(i,1);
+        auxY(i,1)=Y(i,1);
     }
 
     //% Acceleration due to harmonic gravity field
@@ -89,14 +99,16 @@ Matrix Accel(double x, const Matrix& Y){
         a = a + AccelPointMass(auxY,r_Pluto,Constants::GM_Pluto);
     }
 
-    Matrix dY(1,6);
+
+    Matrix dY(6,1);
 
     for(int i=4;i<=6;i++){
-        dY(1,i)=Y(i,1);
+        dY(i-3,1)=Y(i,1);
     }
     for(int i=7;i<=9;i++){
-        dY(1,i)=a(i,1);
+        dY(i-3,1)=a(i-6,1);
     }
 
     return dY;
-}*/
+
+}

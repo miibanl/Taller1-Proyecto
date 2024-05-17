@@ -379,6 +379,20 @@ void Matrix::copyColumnFrom(const Matrix& source, int sourceCol, int destCol) {
 }
 
 
+Matrix Matrix::operator-() const {
+    Matrix result(fil, col);
+
+    for (int i = 0; i < fil; ++i) {
+        for (int j = 0; j < col; ++j) {
+            result.matrix[i][j] = -matrix[i][j];
+        }
+    }
+
+    return result;
+}
+
+
+
 
 
 

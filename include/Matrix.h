@@ -19,10 +19,12 @@ class Matrix
         Matrix operator*(double scalar);
         friend Matrix operator*(double scalar, const Matrix& matrix);
         Matrix operator+(double scalar);
+        Matrix operator-() const;
 
 
 
-    double& operator()(int i, int j) const;
+
+        double& operator()(int i, int j) const;
 
         static Matrix cross(const Matrix& a, const Matrix& b);
         static double dot(const Matrix &a, const Matrix &b);
