@@ -16,7 +16,7 @@
 
 
 
-Matrix Accel(double x, const Matrix& Y);
+Matrix Accel(double x, Matrix& Y);
 
 
 #endif //PROYECTO_ACCEL_H

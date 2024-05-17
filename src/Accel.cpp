@@ -34,7 +34,7 @@
 %
 %--------------------------------------------------------------------------
 */
-Matrix Accel(double x, const Matrix& Y){
+Matrix Accel(double x,Matrix& Y){
 
     //USAR SOLO AL HACER LOS TEST
     //Global::AuxParam::Mjd_UTC=49746.1163541665;

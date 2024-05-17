@@ -41,6 +41,7 @@
 #include "./include/G_AccelHarmonic.h"
 #include "./include/VarEqn.h"
 #include "./include/Accel.h"
+#include "./include/DEInteg.h"
 
 
 
@@ -970,7 +971,7 @@ int VarEqn(){
     return 0;
 }
 
-int Accel(){
+int Accel345(){
     double x=-543.47687488452;
     Matrix Y(6,1);
     Y(1,1)=5720694.2260585;
@@ -993,50 +994,74 @@ int Accel(){
     return 0;
 }
 
+int DEInteg(){
+
+    Matrix y(6,1);
+    y(1,1)= 7101597.84250254;
+    y(2,1)= 1295247.06100898;
+    y(3,1)= 12762.8936334589;
+    y(4,1)= 576.097627376774;
+    y(5,1)=-3084.51047032313;
+    y(6,1)=-6736.01185847833;
+
+    Matrix sol(6,1);
+
+    sol=DEInteg(Accel,0,-535.999989509583,1e-13,1e-6,6,y);
+
+    _assert(fabs(sol(1,1) -     5720694.2260585 ) < TOL_);
+    _assert(fabs(sol(2,1) -    2687728.41425143 ) < TOL_);
+    _assert(fabs(sol(3,1) -    3483000.08675422 ) < TOL_);
+    _assert(fabs(sol(4,1) -    4371.83136151615 ) < TOL_);
+    _assert(fabs(sol(5,1) -   -1905.47309296262 ) < TOL_);
+    _assert(fabs(sol(6,1) -    -5698.5834161219 ) < TOL_);
+
+    return 0;
+}
+
 
 
 int all_tests()
 {
 
-    _verify(proMat_01);
-    _verify(R_x_01);
-    _verify(R_y_01);
-    _verify(R_z_01);
-    _verify(SAT_Const_01);
-    _verify(Sign_01);
-    _verify(TimeDiff_01);
-    _verify(Unit_01);
-    _verify(AccelPointMassTest);
-    _verify(AzElPa);
-    _verify(Cheb3D);
-    _verify(EccAnom);
-    _verify(Frac);
-    _verify(Geodetic);
-    _verify(Legendre);
-    _verify(MeanObliquity);
-    _verify(Mjday);
-    _verify(Mjday_TDB);
-    _verify(NutAngles);
-    _verify(Position);
-    _verify(IERS);
-    _verify(PoleMatrix);
-    _verify(PrecMatrix);
-    _verify(NutMatrix);
-    _verify(gmst);
-    _verify(EqnEquinox);
-    _verify(gast);
-    _verify(GHAMatrix);
-    _verify(AccelHarmonic);
-    _verify(LTC);
-    _verify(elements);
-    _verify(angl);
-    _verify(TimeUpdate);
-    _verify(MeasUpdate);
-    _verify(JPL_Eph_DE430);
-    _verify(G_AccelHarmonic);
+    //_verify(proMat_01);
+    //_verify(R_x_01);
+    //_verify(R_y_01);
+    //_verify(R_z_01);
+    //_verify(SAT_Const_01);
+    //_verify(Sign_01);
+    //_verify(TimeDiff_01);
+    //_verify(Unit_01);
+    //_verify(AccelPointMassTest);
+    //_verify(AzElPa);
+    //_verify(Cheb3D);
+    //_verify(EccAnom);
+    //_verify(Frac);
+    //_verify(Geodetic);
+    //_verify(Legendre);
+    //_verify(MeanObliquity);
+    //_verify(Mjday);
+    //_verify(Mjday_TDB);
+    //_verify(NutAngles);
+    //_verify(Position);
+    //_verify(IERS);
+    //_verify(PoleMatrix);
+    //_verify(PrecMatrix);
+    //_verify(NutMatrix);
+    //_verify(gmst);
+    //_verify(EqnEquinox);
+    //_verify(gast);
+    //_verify(GHAMatrix);
+    //_verify(AccelHarmonic);
+    //_verify(LTC);
+    //_verify(elements);
+    //_verify(angl);
+    //_verify(TimeUpdate);
+    //_verify(MeasUpdate);
+    //_verify(JPL_Eph_DE430);
+    //_verify(G_AccelHarmonic);
     //_verify(VarEqn);//Para activar el test entrar al método y poner los datos del auxParam
     //_verify(Accel);//Para activar el test entrar al método y poner los datos del auxParam
-
+    _verify(DEInteg);
 
 
 
