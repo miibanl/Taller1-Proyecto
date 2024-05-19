@@ -390,9 +390,7 @@ int Position() {
 int IERS() {
     Matrix sol(1,9);
 
-    Global::eop19620101(21413);
 
-    //Global::eopdata->print();
 
     sol=IERS(*Global::eopdata, 49746.0, 'l');
 
@@ -870,6 +868,11 @@ int G_AccelHarmonic(){
 
 int VarEqn(){
 
+    Global::AuxParam::Mjd_UTC = 49746.1163541665;
+    Global::AuxParam::Mjd_TT = 49746.1170623147;
+    Global::AuxParam::n = 20;
+    Global::AuxParam::m = 20;
+
     double x=5.38970808087706;
 
     Matrix yPhi(42,1);
@@ -971,7 +974,15 @@ int VarEqn(){
     return 0;
 }
 
-int Accel345(){
+int Accel(){
+    Global::AuxParam::Mjd_UTC=49746.1163541665;
+    Global::AuxParam::n = 20;
+    Global::AuxParam::m = 20;
+    Global::AuxParam::sun = 1;
+    Global::AuxParam::moon = 1;
+    Global::AuxParam::planets = 1;
+
+
     double x=-543.47687488452;
     Matrix Y(6,1);
     Y(1,1)=5720694.2260585;
@@ -996,24 +1007,32 @@ int Accel345(){
 
 int DEInteg(){
 
+    Global::AuxParam::Mjd_UTC=49746.1112847221;
+    Global::AuxParam::n = 20;
+    Global::AuxParam::m = 20;
+    Global::AuxParam::sun = 1;
+    Global::AuxParam::moon = 1;
+    Global::AuxParam::planets = 1;
+
     Matrix y(6,1);
-    y(1,1)= 7101597.84250254;
-    y(2,1)= 1295247.06100898;
-    y(3,1)= 12762.8936334589;
-    y(4,1)= 576.097627376774;
-    y(5,1)=-3084.51047032313;
-    y(6,1)=-6736.01185847833;
+    y(1,1)= 6221397.62857869;
+    y(2,1)= 2867713.77965738;
+    y(3,1)= 3006155.98509949;
+    y(4,1)= 4645.04725161807;
+    y(5,1)=-2752.21591588205;
+    y(6,1)=-7507.99940987033;
 
     Matrix sol(6,1);
 
-    sol=DEInteg(Accel,0,-535.999989509583,1e-13,1e-6,6,y);
+    DEInteg(Accel,0,-134.999991953373,1e-13,1e-6,6,y);
 
-    _assert(fabs(sol(1,1) -     5720694.2260585 ) < TOL_);
-    _assert(fabs(sol(2,1) -    2687728.41425143 ) < TOL_);
-    _assert(fabs(sol(3,1) -    3483000.08675422 ) < TOL_);
-    _assert(fabs(sol(4,1) -    4371.83136151615 ) < TOL_);
-    _assert(fabs(sol(5,1) -   -1905.47309296262 ) < TOL_);
-    _assert(fabs(sol(6,1) -    -5698.5834161219 ) < TOL_);
+
+    _assert(fabs(y(1,1) -   5542555.93722861 ) < TOLG_);
+    _assert(fabs(y(2,1) -    3213514.8673492 ) < TOLG_);
+    _assert(fabs(y(3,1) -   3990892.97587686 ) < TOLG_);
+    _assert(fabs(y(4,1) -   5394.06842166353 ) < TOL_);
+    _assert(fabs(y(5,1) -  -2365.21337882342 ) < TOL_);
+    _assert(fabs(y(6,1) -  -7061.84554200298 ) < TOL_);
 
     return 0;
 }
@@ -1023,45 +1042,46 @@ int DEInteg(){
 int all_tests()
 {
 
-    //_verify(proMat_01);
-    //_verify(R_x_01);
-    //_verify(R_y_01);
-    //_verify(R_z_01);
-    //_verify(SAT_Const_01);
-    //_verify(Sign_01);
-    //_verify(TimeDiff_01);
-    //_verify(Unit_01);
-    //_verify(AccelPointMassTest);
-    //_verify(AzElPa);
-    //_verify(Cheb3D);
-    //_verify(EccAnom);
-    //_verify(Frac);
-    //_verify(Geodetic);
-    //_verify(Legendre);
-    //_verify(MeanObliquity);
-    //_verify(Mjday);
-    //_verify(Mjday_TDB);
-    //_verify(NutAngles);
-    //_verify(Position);
-    //_verify(IERS);
-    //_verify(PoleMatrix);
-    //_verify(PrecMatrix);
-    //_verify(NutMatrix);
-    //_verify(gmst);
-    //_verify(EqnEquinox);
-    //_verify(gast);
-    //_verify(GHAMatrix);
-    //_verify(AccelHarmonic);
-    //_verify(LTC);
-    //_verify(elements);
+
+//   _verify(proMat_01);
+//   _verify(R_x_01);
+//   _verify(R_y_01);
+//   _verify(R_z_01);
+//   _verify(SAT_Const_01);
+//   _verify(Sign_01);
+//   _verify(TimeDiff_01);
+//   _verify(Unit_01);
+//   _verify(AccelPointMassTest);
+//   _verify(AzElPa);
+//   _verify(Cheb3D);
+//   _verify(EccAnom);
+//   _verify(Frac);
+//   //_verify(Geodetic);//
+//   //_verify(Legendre);//
+//   _verify(MeanObliquity);
+//   _verify(Mjday);
+//   _verify(Mjday_TDB);
+//   _verify(NutAngles);
+//   _verify(Position);
+//   //_verify(IERS);
+//   //_verify(PoleMatrix);
+//   _verify(PrecMatrix);
+//   _verify(NutMatrix);
+//   _verify(gmst);
+//   _verify(EqnEquinox);
+//   //_verify(gast);
+//   _verify(GHAMatrix);
+//   _verify(AccelHarmonic);
+//   //_verify(LTC);
+//   _verify(elements);
     //_verify(angl);
     //_verify(TimeUpdate);
-    //_verify(MeasUpdate);
+    _verify(MeasUpdate);
     //_verify(JPL_Eph_DE430);
     //_verify(G_AccelHarmonic);
-    //_verify(VarEqn);//Para activar el test entrar al método y poner los datos del auxParam
-    //_verify(Accel);//Para activar el test entrar al método y poner los datos del auxParam
-    _verify(DEInteg);
+    //_verify(VarEqn);
+    //_verify(Accel);
+    //_verify(DEInteg);
 
 
 
@@ -1070,13 +1090,14 @@ int all_tests()
     return 0;
 }
 
-
+/*
 int main()
 {
 
-    //Global::eop19620101(6);
-
-    //Global::eopdata->print();
+    Global::eop19620101(21413);
+    Global::DE430Coeff();
+    Global::GGM03S();
+    //Global::GEOS3(46);
 
 
 
@@ -1089,4 +1110,4 @@ int main()
 
     return result != 0;
 }
-
+*/

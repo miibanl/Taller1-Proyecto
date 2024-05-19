@@ -31,15 +31,7 @@
 */
 Matrix VarEqn(double x,Matrix& yPhi) {
 
-    Global::eop19620101(21413);
-
-
-    //USAR SOLO AL HACER LOS TEST
-    //Global::AuxParam::Mjd_UTC = 49746.1163541665;
-    //Global::AuxParam::Mjd_TT = 49746.1170623147;
-    //Global::AuxParam::n = 20;
-    //Global::AuxParam::m = 20;
-
+    //Global::eop19620101(21413);
 
     Matrix iers = IERS(*Global::eopdata, Global::AuxParam::Mjd_UTC, 'l');
     Matrix timediff = timeDiff(iers(1, 3), iers(1, 9));

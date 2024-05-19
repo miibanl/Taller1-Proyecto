@@ -34,9 +34,9 @@ void JPL_Eph_DE430(double Mjd_TDB, Matrix& r_Mercury, Matrix& r_Venus, Matrix& r
 
     double JD = Mjd_TDB + 2400000.5;
 
-    //MIRAR ESTO
+    //Global::DE430Coeff();
 
-    Global::DE430Coeff();
+
     int i;
     for (i = 1; i <= Global::PC->getCols(); i++) {
         if ((*Global::PC)(i, 1) <= JD && JD<=(*Global::PC)(i, 2) ) {
