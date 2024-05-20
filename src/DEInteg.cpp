@@ -103,44 +103,44 @@ void DEInteg(Matrix (*func)(double, Matrix&), double t, double tout, double rele
 
     double x=0.0;
     bool start = false;
-    bool OldPermit;
-    double delsgn;
+    bool OldPermit=false;
+    double delsgn=0.0;
     double h=0.0;
-    int i;
-    double temp1;
-    int kold;
+    int i=0;
+    double temp1=0.0;
+    int kold=0;
     double err=0.0;
 
 
-    int kp1;
-    int kp2;
-    int km1;
-    int km2;
-    int knew;
-    double erk;
-    double erkm1;
-    double erkm2;
-    int ns;
-    double temp2;
-    double term;
+    int kp1=0;
+    int kp2=0;
+    int km1=0;
+    int km2=0;
+    int knew=0;
+    double erk=0.0;
+    double erkm1=0.0;
+    double erkm2=0.0;
+    int ns=0;
+    double temp2=0.0;
+    double term=0.0;
 
 
 
 
-    bool nornd;
-    int k;
-    bool phase1;
-    double absh;
-    double hnew;
+    bool nornd=false;
+    int k=0;
+    bool phase1=false;
+    double absh=0.0;
+    double hnew=0.0;
     kold =0;
     double hold=0.0;
 
 
-    double temp3;
-    double temp4;
-    double temp5;
-    double temp6;
-    int ip1;
+    double temp3=0.0;
+    double temp4=0.0;
+    double temp5=0.0;
+    double temp6=0.0;
+    int ip1=0;
 
     if (State_ == DE_STATE::DE_INIT || !OldPermit || delsgn * del <= 0.0) {
         //% On start and restart also set the work variables x and yy(*),

@@ -92,7 +92,7 @@ int proMat_01()
     //sol.print();
 
     _assert(sol(1,1) == m1(1,1) && sol(1,2) == m1(1,2) && sol(2,1) == m1(2,1) && sol(2,2) == m1(2,2));
-    
+
     return 0;
 }
 
@@ -222,7 +222,7 @@ int AccelPointMassTest() {
 }
 
 int AzElPa() {
-    Matrix s(3, 1);
+    Matrix s(1, 3);
     s(1, 1) = 1.0;
     s(1, 2) = 1.0;
     s(1, 3) = 1.0;
@@ -1041,51 +1041,45 @@ int DEInteg(){
 
 int all_tests()
 {
-
-
-//   _verify(proMat_01);
-//   _verify(R_x_01);
-//   _verify(R_y_01);
-//   _verify(R_z_01);
-//   _verify(SAT_Const_01);
-//   _verify(Sign_01);
-//   _verify(TimeDiff_01);
-//   _verify(Unit_01);
-//   _verify(AccelPointMassTest);
-//   _verify(AzElPa);
-//   _verify(Cheb3D);
-//   _verify(EccAnom);
-//   _verify(Frac);
-//   //_verify(Geodetic);//
-//   //_verify(Legendre);//
-//   _verify(MeanObliquity);
-//   _verify(Mjday);
-//   _verify(Mjday_TDB);
-//   _verify(NutAngles);
-//   _verify(Position);
-//   //_verify(IERS);
-//   //_verify(PoleMatrix);
-//   _verify(PrecMatrix);
-//   _verify(NutMatrix);
-//   _verify(gmst);
-//   _verify(EqnEquinox);
-//   //_verify(gast);
-//   _verify(GHAMatrix);
-//   _verify(AccelHarmonic);
-//   //_verify(LTC);
-//   _verify(elements);
-    //_verify(angl);
-    //_verify(TimeUpdate);
+    _verify(proMat_01);
+    _verify(R_x_01);
+    _verify(R_y_01);
+    _verify(R_z_01);
+    _verify(SAT_Const_01);
+    _verify(Sign_01);
+    _verify(TimeDiff_01);
+    _verify(Unit_01);
+    _verify(AccelPointMassTest);
+    _verify(AzElPa);
+    _verify(Cheb3D);
+    _verify(EccAnom);
+    _verify(Frac);
+    _verify(Geodetic);
+    _verify(Legendre);
+    _verify(MeanObliquity);
+    _verify(Mjday);
+    _verify(Mjday_TDB);
+    _verify(NutAngles);
+    _verify(Position);
+    _verify(IERS);
+    _verify(PoleMatrix);
+    _verify(PrecMatrix);
+    _verify(NutMatrix);
+    _verify(gmst);
+    _verify(EqnEquinox);
+    _verify(gast);
+    _verify(GHAMatrix);
+    _verify(AccelHarmonic);
+    _verify(LTC);
+    _verify(elements);
+    _verify(angl);
+    _verify(TimeUpdate);
     _verify(MeasUpdate);
-    //_verify(JPL_Eph_DE430);
-    //_verify(G_AccelHarmonic);
-    //_verify(VarEqn);
-    //_verify(Accel);
-    //_verify(DEInteg);
-
-
-
-
+    _verify(JPL_Eph_DE430);
+    _verify(G_AccelHarmonic);
+    _verify(VarEqn);
+    _verify(Accel);
+    _verify(DEInteg);
 
     return 0;
 }
@@ -1094,9 +1088,10 @@ int all_tests()
 int main()
 {
 
-    Global::eop19620101(21413);
     Global::DE430Coeff();
     Global::GGM03S();
+    Global::eop19620101(21413);
+
     //Global::GEOS3(46);
 
 

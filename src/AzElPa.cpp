@@ -31,7 +31,7 @@ void AzElPa(const Matrix& s, double& Az, double& El, Matrix& dAds, Matrix& dEds)
     Az = atan2(s(1, 1), s(1, 2));
 
     if (Az < 0.0) {
-        Az = Az + Constants::pi2;
+        Az = Az + (Constants::pi2);
     }
 
     El = atan(s(1, 3) / rho);
