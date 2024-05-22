@@ -225,7 +225,7 @@ void DEInteg(Matrix (*func)(double, Matrix&), double t, double tout, double rele
 //       %           State_ = DE_STATE.DE_STIFF;% Stiffness suspected
 //       %       end
 //       %       y         = yy;                % Copy last step
-//                                                                                                             %       t         = x;
+//       %       t         = x;
 //       %       told      = t;
 //       %       OldPermit = true;
 //       %       return;                        % Weak failure exit
