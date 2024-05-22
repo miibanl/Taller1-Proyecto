@@ -7,6 +7,13 @@
 
 #include "cmath"
 
+/*!
+ * @file sign.h
+ * @brief Returns the absolute value of a with the sign of b
+ * @param a The value whose absolute value will be returned
+ * @param b The value whose sign will be applied to a
+ * @return The absolute value of a with the sign of b
+ */
 double sign_(double a, double b);
 
 

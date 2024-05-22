@@ -8,6 +8,13 @@
 #include "Matrix.h"
 #include "SAT_Const.h"
 
+
+/*!
+ * @file NutAngles.h
+ * @brief Nutation in longitude and obliquity
+ * @param Mjd_TT Modified Julian Date (Terrestrial Time)
+ * @return Nutation Angles
+ */
 Matrix NutAngles(double Mjd_TT);
 
 #endif //PROYECTO_NUTANGLES_H

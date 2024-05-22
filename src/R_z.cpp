@@ -5,7 +5,15 @@
 #include "../include/R_z.h"
 
 
-
+/*
+%--------------------------------------------------------------------------
+%  input:
+%    angle       - angle of rotation [rad]
+%
+%  output:
+%    rotmat      - vector result
+%--------------------------------------------------------------------------
+*/
 Matrix R_z(double alpha){
     double C=cos(alpha);
     double S=sin(alpha);

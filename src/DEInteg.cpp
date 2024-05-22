@@ -2,9 +2,7 @@
 // Created by miguel on 11/05/2024.
 //
 
-#include <iostream>
 #include "../include/DEInteg.h"
-#include "../include/sign.h"
 
 /*
 %----------------------------------------------------------------------------

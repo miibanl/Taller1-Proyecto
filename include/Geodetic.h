@@ -13,6 +13,12 @@
 #include <limits>
 
 
+/*!
+ * @file Geodetic.h
+ * @brief geodetic coordinates (Longitude [rad], latitude [rad], altitude [m]) from given position vector (r [m])
+ * @param r Position vector[m]
+ * @return Matrix(lon,lat,alt)
+ */
 Matrix Geodetic(const Matrix& r);
 
 

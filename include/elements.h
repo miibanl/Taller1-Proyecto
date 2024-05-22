@@ -9,6 +9,12 @@
 #include "SAT_Const.h"
 
 
+/*!
+ * @file elements.h
+ * @brief The function cannot be used with state vectors describing a circular or non-inclined orbit
+ * @param y State vector (x,y,z,vx,vy,vz)
+ * @return Matriz with(semilatus rectum [m],semilatus rectum [m],Eccentricity,Inclination [rad],Longitude of the ascending node [rad],Argument of pericenter [rad],Mean anomaly [rad])
+ */
 Matrix elements(const Matrix& y);
 
 

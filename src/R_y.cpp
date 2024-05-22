@@ -14,7 +14,6 @@
 %    rotmat      - vector result
 %--------------------------------------------------------------------------
 */
-
 Matrix R_y(double alpha){
     double C=cos(alpha);
     double S=sin(alpha);

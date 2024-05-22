@@ -9,6 +9,12 @@
 #include "cmath"
 #include "Matrix.h"
 
+/*!
+ * @file R_y.h
+ * @brief Computes the rotation matrix for a rotation about the y-axis
+ * @param alpha angle of rotation [rad]
+ * @return Rotation matrix representing the rotation about the y-axis
+ */
 Matrix R_y(double alpha);
 
 

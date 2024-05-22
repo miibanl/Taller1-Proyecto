@@ -10,6 +10,14 @@
 #include "R_z.h"
 #include "R_y.h"
 
+
+/*!
+ * @file PrecMatrix.h
+ * @brief Precession transformation of equatorial coordinates
+ * @param Mjd_1 Epoch given (Modified Julian Date TT)
+ * @param Mjd_2 Epoch to precess to (Modified Julian Date TT)
+ * @return Precession transformation matrix
+ */
 Matrix PrecMatrix(double Mjd_1, double Mjd_2);
 
 

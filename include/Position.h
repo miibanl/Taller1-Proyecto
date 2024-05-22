@@ -9,6 +9,15 @@
 #include "Matrix.h"
 #include "SAT_Const.h"
 
+
+/*!
+ * @file Position.h
+ * @brief Position vector (r [m]) from geodetic coordinates (Longitude [rad], latitude [rad], altitude [m])
+ * @param lon (Longitude [rad])
+ * @param lat (Latitude [rad]
+ * @param h (Altitude [m]
+ * @return Position vector (r [m])
+ */
 Matrix Position(double lon, double lat, double h);
 
 

@@ -363,20 +363,7 @@ Matrix Matrix::concatenateHorizontal(const Matrix& matrix1, const Matrix& matrix
 }
 
 
-void Matrix::copyColumnFrom(const Matrix& source, int sourceCol, int destCol) {
-    if (source.getRows() != fil || source.getCols() < sourceCol || destCol < 1 || destCol > col) {
-        std::cerr << "Tamanio o indices de columna fuera de rango." << std::endl;
-        exit(EXIT_FAILURE);
-    }
 
-    for (int i = 0; i < fil; ++i) {
-        if (i < source.getRows()) {
-            matrix[i][destCol - 1] = source(i + 1, sourceCol);
-        } else {
-            matrix[i][destCol - 1] = 0.0; // Rellenar con ceros si la matriz fuente es más pequeña
-        }
-    }
-}
 
 
 Matrix Matrix::operator-() const {

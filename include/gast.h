@@ -9,6 +9,12 @@
 #include "gmst.h"
 #include "EqnEquinox.h"
 
+/*!
+ * @file gast.h
+ * @brief Greenwich Apparent Sidereal Time
+ * @param Mjd_UT1 Modified Julian Date UT1
+ * @return GAST in [rad]
+ */
 double gast(double Mjd_UT1);
 
 #endif //PROYECTO_GAST_H

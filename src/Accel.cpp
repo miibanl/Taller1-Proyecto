@@ -3,13 +3,7 @@
 //
 
 #include "../include/Accel.h"
-#include "../include/NutMatrix.h"
-#include "../include/PoleMatrix.h"
-#include "../include/GHAMatrix.h"
-#include "../include/Mjday_TDB.h"
-#include "../include/AccelPointMass.h"
-#include "../include/AccelHarmonic.h"
-#include "../include/JPL_Eph_DE430.h"
+
 
 /*
 %--------------------------------------------------------------------------
@@ -34,6 +28,7 @@
 %
 %--------------------------------------------------------------------------
 */
+
 Matrix Accel(double x,Matrix& Y){
 
 

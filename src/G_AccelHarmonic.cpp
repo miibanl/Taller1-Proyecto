@@ -3,7 +3,6 @@
 //
 
 #include "../include/G_AccelHarmonic.h"
-#include "../include/AccelHarmonic.h"
 
 /*
 %--------------------------------------------------------------------------

@@ -8,6 +8,13 @@
 #include "Matrix.h"
 
 
+/*!
+ * @file angl.h
+ * @brief Computes the angle between two vectors
+ * @param vec1 vector 1
+ * @param vec2 vector 2
+ * @return angle between the two vectors  -pi to pi
+ */
 double angl(const Matrix& vec1, const Matrix& vec2);
 
 #endif //PROYECTO_ANGL_H

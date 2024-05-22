@@ -8,35 +8,54 @@
 #include "Matrix.h"
 #include <cstdio>
 #include "cstdlib"
-
-class Global{
+/*!
+ * @file Global.h
+ * @class Global
+ * @brief Provides global variables and functions for managing Earth orientation parameters, gravity model coefficients, planetary coefficients, and GEOS3 data.
+ */
+class Global {
 public:
-    static Matrix *eopdata;
+    // Earth orientation parameters data
+    static Matrix* eopdata;
+    /*!
+     * @brief Loads Earth orientation parameters from a file.
+     * @param fila Number of rows to read from the file.
+     */
     static void eop19620101(int fila);
 
-    static Matrix *Cnm;
-    static Matrix *Snm;
+    // Gravity model coefficients
+    static Matrix* Cnm;
+    static Matrix* Snm;
+    /*!
+     * @brief Loads gravity model coefficients from a file.
+     */
     static void GGM03S();
 
+    // Auxiliary parameters for various calculations
     struct AuxParam {
-        static double Mjd_UTC;
-        static double Mjd_TT;
-        static int n;
-        static int m;
-        static int sun;
-        static int moon;
-        static int planets;
+        static double Mjd_UTC;  ///< Modified Julian Date for Coordinated Universal Time
+        static double Mjd_TT;   ///< Modified Julian Date for Terrestrial Time
+        static int n;           ///< Degree of the spherical harmonics
+        static int m;           ///< Order of the spherical harmonics
+        static int sun;         ///< Flag to include the Sun
+        static int moon;        ///< Flag to include the Moon
+        static int planets;     ///< Flag to include other planets
     };
 
-    static Matrix *PC;
+    // Planetary coefficients
+    static Matrix* PC;
+    /*!
+     * @brief Loads planetary coefficients from a file.
+     */
     static void DE430Coeff();
 
-    static Matrix *geos3;
+    // GEOS3 data
+    static Matrix* geos3;
+    /*!
+     * @brief Loads GEOS3 data from a file.
+     * @param fila Number of rows to read from the file.
+     */
     static void GEOS3(int fila);
-
-
-
-
 };
 
 
