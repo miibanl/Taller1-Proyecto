@@ -2,6 +2,18 @@
 // Created by miguel on 06/05/2024.
 //
 
+
+/*!
+ * @file EKF_GEOS3.cpp
+ * @brief  Test file for Initial Orbit Determination using Gauss and Extended Kalman Filter methods.
+ *
+ * This test file is designed to validate the main functionalities of the orbit determination code.
+ * It uses a set of predefined observations and checks the correctness of the output.
+ *
+ * Last modified: 2020/03/16 by Meysam Mahooti
+ *
+ * @author miguel
+ */
 #include <iostream>
 #include <fstream>
 #include "./include/Matrix.h"
