@@ -5,10 +5,13 @@
 
 /*!
  * @file EKF_GEOS3.cpp
- * @brief  Test file for Initial Orbit Determination using Gauss and Extended Kalman Filter methods.
+ * @brief Initial Orbit Determination using Gauss and Extended Kalman Filter methods.
  *
- * This test file is designed to validate the main functionalities of the orbit determination code.
- * It uses a set of predefined observations and checks the correctness of the output.
+ * This program implements initial orbit determination using Gauss and Extended Kalman Filter methods.
+ * The primary references for this implementation are:
+ * - O. Montenbruck, E. Gill, "Satellite Orbits - Models, Methods, and Applications", Springer Verlag, Heidelberg, 2000.
+ * - D. Vallado, "Fundamentals of Astrodynamics and Applications", 4th Edition, 2013.
+ * - G. Seeber, "Satellite Geodesy", 2nd Edition, 2003.
  *
  * Last modified: 2020/03/16 by Meysam Mahooti
  *

@@ -44,7 +44,10 @@
 
 /*!
  * @file EKF_Test.cpp
- * @brief This is
+ * @brief Test file for Initial Orbit Determination using Gauss and Extended Kalman Filter methods.
+ *
+ * This test file is designed to validate the main functionalities of the orbit determination code.
+ * It uses a set of predefined observations and checks the correctness of the output.
  *
  * @author miguel
  */
