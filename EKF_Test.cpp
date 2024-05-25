@@ -1084,7 +1084,7 @@ int all_tests()
     return 0;
 }
 
-/*
+
 int main()
 {
 
@@ -1105,4 +1105,4 @@ int main()
 
     return result != 0;
 }
-*/
+

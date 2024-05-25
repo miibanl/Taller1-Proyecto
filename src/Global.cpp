@@ -10,9 +10,9 @@ Matrix *Global::eopdata;
 void Global::eop19620101(int fila) {
     Global::eopdata = new Matrix(fila, 13);
 
-    FILE *fid = fopen("../data/eop19620101.txt","r");
+    FILE *fid = fopen("./data/eop19620101.txt","r");
     if (fid == nullptr) {
-        printf("Error al abrir el fichero.");
+        printf("Error al abrir el fichero eop19620101.txt.");
         exit(EXIT_FAILURE);
     }
 
@@ -39,9 +39,9 @@ void Global::GGM03S () {
     Matrix *aux = new Matrix(6, 1);
 
 
-    FILE *fid = fopen("../data/GGM03S.txt","r");
+    FILE *fid = fopen("./data/GGM03S.txt","r");
     if (fid == NULL) {
-        printf("Error al abrir el fichero.");
+        printf("Error al abrir el fichero GGM03S.txt.");
         exit(EXIT_FAILURE);
     }
 
@@ -65,9 +65,9 @@ void Global::DE430Coeff(){
     Global::PC = new Matrix(2285, 1020);
 
 
-    FILE *fid = fopen("../data/DE430Coeff.txt","r");
+    FILE *fid = fopen("./data/DE430Coeff.txt","r");
     if (fid == nullptr) {
-        printf("Error al abrir el fichero.");
+        printf("Error al abrir el fichero DE430Coeff.txt.");
         exit(EXIT_FAILURE);
     }
 
@@ -86,9 +86,9 @@ Matrix *Global::geos3;
 void Global::GEOS3(int fila) {
     Global::geos3 = new Matrix(fila, 5);
 
-    FILE *fid = fopen("../data/GEOS3.txt", "r");
+    FILE *fid = fopen("./data/GEOS3.txt", "r");
     if (fid == nullptr) {
-        printf("Error al abrir el fichero.");
+        printf("Error al abrir el fichero GEOS3.txt.");
         exit(EXIT_FAILURE);
     }
     for (int i = 1; i <= fila; i++) {

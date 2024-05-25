@@ -14,12 +14,12 @@
 #include "./include/Mjday.h"
 #include "./include/Position.h"
 #include "./include/IERS.h"
-#include "include/Accel.h"
-#include "include/DEInteg.h"
-#include "include/LTC.h"
-#include "include/VarEqn.h"
-#include "include/TimeUpdate.h"
-#include "include/MeasUpdate.h"
+#include "./include/Accel.h"
+#include "./include/DEInteg.h"
+#include "./include/LTC.h"
+#include "./include/VarEqn.h"
+#include "./include/TimeUpdate.h"
+#include "./include/MeasUpdate.h"
 
 /*
 %--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ int main() {
 
 
 
-    std::ifstream infile("../data/GEOS3.txt");
+    std::ifstream infile("./data/GEOS3.txt");
     std::string line;
 
     for (int i = 1; i <= nobs && std::getline(infile, line); ++i) {
