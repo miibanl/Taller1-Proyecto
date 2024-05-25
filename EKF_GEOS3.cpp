@@ -3,30 +3,15 @@
 //
 
 #include <iostream>
-#include <iomanip>
-#include <cstdio>
-#include <cmath>
 #include <fstream>
 #include "./include/Matrix.h"
-#include "./include/R_x.h"
-#include "./include/R_y.h"
 #include "./include/R_z.h"
 #include "./include/SAT_Const.h"
 #include "./include/Global.h"
-#include "./include/sign.h"
 #include "./include/TimeDiff.h"
-#include "./include/Unit.h"
-#include "./include/AccelPointMass.h"
 #include "./include/AzElPa.h"
 #include "./include/Cheb3D.h"
-#include "./include/EccAnom.h"
-#include "./include/Frac.h"
-#include "./include/Geodetic.h"
-#include "./include/Legendre.h"
-#include "./include/MeanObliquity.h"
 #include "./include/Mjday.h"
-#include "./include/Mjday_TDB.h"
-#include "./include/NutAngles.h"
 #include "./include/Position.h"
 #include "./include/IERS.h"
 #include "include/Accel.h"
@@ -322,14 +307,14 @@ int main() {
 
     double Y_true[] = {5753.173e3, 2673.361e3, 3440.304e3, 4.324207e3, -1.924299e3, -5.728216e3};
 
-    std::cout << "\nError of Position Estimation\n" << std::endl;
+    std::cout << "Error of Position Estimation" << std::endl;
     std::cout << "dX  " << Y(1,1) - Y_true[0] << "   [m]" << std::endl;
     std::cout << "dY  " << Y(2,1) - Y_true[1] << "   [m]" << std::endl;
     std::cout << "dZ  " << Y(3,1) - Y_true[2] << "   [m]" << std::endl;
-    std::cout << "\nError of Velocity Estimation\n" << std::endl;
-    std::cout << "dV  " << Y(4,1) - Y_true[3] << "   [m/s]" << std::endl;
-    std::cout << "dV  " << Y(5,1) - Y_true[4] << "   [m/s]" << std::endl;
-    std::cout << "dV  " << Y(6,1) - Y_true[5] << "   [m/s]" << std::endl;
+    std::cout << "\nError of Velocity Estimation" << std::endl;
+    std::cout << "dVx  " << Y(4,1) - Y_true[3] << "   [m/s]" << std::endl;
+    std::cout << "dVy  " << Y(5,1) - Y_true[4] << "   [m/s]" << std::endl;
+    std::cout << "dVz  " << Y(6,1) - Y_true[5] << "   [m/s]" << std::endl;
 
 
 
